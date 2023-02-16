@@ -2,6 +2,9 @@
 ###         Projeto CONTRATADO  Módulo 2            ###
 ###                 Cassio Ribeiro                  ###
 
+
+
+
 '''vagas = {"Analista de Dados Jr": ["python", "dados", "sql"],                    #Dicionário de apoio para o programador. não tem função efetiva no código.
          "Desenvolvedor back-end": ["java", "Php", "desenvolvedor"]
 }'''
@@ -12,30 +15,39 @@ def findCandidatos ():                      #def que irá fazer a filtragem dos 
     aptosv1 = {}                              #\
     aptosv2 = {}                               #\ Dicionários vazios que irão receber dados dos usuário conforme condicionáis ao longo do código.
 
-    print( )
-    print("##########{:^150}##########".format("BEM VINDO AO FIND CANDIDATOS"))
-    print( )
+    print("\n##########{:^150}##########\n".format("BEM VINDO AO FIND CANDIDATOS"))
    
     sair = 3
     while (sair != 0):                      #Estrutura de repetição para cadastrar candidatos 
-        nome = str.title(input("Olá, candidato. Por favos nos diga seu nome para darmos continuidade: ")) #Nome do candidato
-        resumo = str.lower(input("Faça um breve resumo sobre você e o por que deseja ingressar na Trust Companny\n"))  #Resumo onde o candidato irá colocar um resumo pessoal e iremos buscar nossas palavras chaves para saber se o mesmo é apto ou não.
-        vaga = int(input("Para qual vaga você deseja se candidatar?\n[1] - Analista de Dados jr\n[2] - Desenvolvedor back end\nEscolha uma das opções: "))  #Variável onde o cancidato irá escolher para qual vaga deseja se inscrever.
+        nome = str.title(input("\nOlá, candidato. Por favos nos diga seu nome para darmos continuidade: ")) #Nome do candidato
+        resumo = str.lower(input("\nFaça um breve resumo sobre você e o por que deseja ingressar na Trust Companny\n"))  #Resumo onde o candidato irá colocar um resumo pessoal e iremos buscar nossas palavras chaves para saber se o mesmo é apto ou não.
+        vaga = 3
+        while vaga >2:              #Loop para voltar caso o usuário digite um número ou caracter errado.
+            try:                    #Tratamento de exceção para caso o usuário digite algo que não seja um número inteiro
+                vaga = int(input("\nPara qual vaga você deseja se candidatar?\n[1] - Analista de Dados jr\n[2] - Desenvolvedor back end\nEscolha uma das opções: "))  #Variável onde o cancidato irá escolher para qual vaga deseja se inscrever.
+            except:
+                print ("\nOps ! Você digitou algo estranho. Por favor digite um número de acordo com o menu.\n")
+            if (vaga == 1):                                  # Condicional para vaga de analista de dados
+                candidatosV1.update({nome:resumo})           # usuário sendo inserido no dicionário dos candidatos incritos para vaga de Analista de Dados.
+                if "python" and "dados" and "sql" in resumo: # Filtro onde buscamos as palavras chaves no resumo que o candidato fez sobre sí mesmo.
+                    aptosv1.update({nome:resumo})            # Condicional para colocar o candidato no dicionário de aptos para vaga de analista caso atenda os requisitos    
 
-        if (vaga == 1):                                  # Condicional para vaga de analista de dados
-            candidatosV1.update({nome:resumo})           # usuário sendo inserido no dicionário dos candidatos incritos para vaga de Analista de Dados.
-            if "python" and "dados" and "sql" in resumo: # Filtro onde buscamos as palavras chaves no resumo que o candidato fez sobre sí mesmo.
-                aptosv1.update({nome:resumo})            # Condicional para colocar o candidato no dicionário de aptos para vaga de analista caso atenda os requisitos    
+            elif (vaga == 2):                                # Aqui se repete a estrutura do if anterior mas mudando as palavras chaves e os dicionários que os candidatos serão enviados.
+                candidatosV2.update({nome:resumo})
+                if "java" and "php" and "desenvolvedor" in resumo:
+                    aptosv2.update({nome:resumo})
+            elif vaga > 2:
+                print("\nOpção inválida. Tente novamente\n")
+            
+        sair = 2
+        while sair >1:
+            try:        #Tratamento de exceção para caso o usuário digite algo que não seja um número inteiro
+                sair = int(input("\nDeseja inserir mais dados de candidatos?\n[1] - Sim\n[0] - Sair\nEscolha sua opção: "))   #Variável para sair do while
+                if sair > 1 :
+                    print("\nOpção inválida. Tente novamente\n")
 
-        elif (vaga == 2):                                # Aqui se repete a estrutura do if anterior mas mudando as palavras chaves e os dicionários que os candidatos serão enviados.
-            candidatosV2.update({nome:resumo})
-            if "java" and "php" and "desenvolvedor" in resumo:
-                aptosv2.update({nome:resumo})
-
-        else:
-            print("Opção inválida")
-       
-        sair = int(input("Deseja inserir mais dados de candidatos?\n[1] - Sim\n[0] - Sair\nEscolha sua opção: "))   #Variável para sair do while
+            except:
+                print ("\nOps ! Você digitou algo estranho. Por favor digite um número de acordo com o menu.\n")
        
     print(f"Temos {len(candidatosV1)} candidatos inscritos para a vaga de Analista de Dados jr com {len(aptosv1)} aptos para prosseguir para a próxima etapa do processo seletivo."  )
     print(f"Temos {len(candidatosV2)} candidatos inscritos para a vaga de Desenvolvedor Backend com {len(aptosv2)} aptos para prosseguir para a próxima etapa do processo seletivo."  )
@@ -65,9 +77,6 @@ def findCandidatos ():                      #def que irá fazer a filtragem dos 
     
     else:
         print("Infelizmente nenhum candidato atendeu aos requisitos para prosseguir à próxima fase do processo seletivo para vaga de Desenvolvedor Back-end.")
-
-    
-
 
 findCandidatos()   #Chamando a função filtrar e buscar os candidatos aptos.
 
