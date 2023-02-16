@@ -1,3 +1,7 @@
+###     Formação Análise de Dados Resilia/Senac     ###
+###         Projeto CONTRATADO  Módulo 2            ###
+###                 Cassio Ribeiro                  ###
+
 '''vagas = {"Analista de Dados Jr": ["python", "dados", "sql"],                    #Dicionário de apoio para o programador. não tem função efetiva no código.
          "Desenvolvedor back-end": ["java", "Php", "desenvolvedor"]
 }'''
